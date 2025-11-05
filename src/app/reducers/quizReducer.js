@@ -19,21 +19,11 @@ export const quizReducer = (state, action) => {
       };
 
     case QUIZ_ACTIONS.ANSWER_QUESTION: {
-      const { answer, isLastQuestion, isReanswering } = action.payload;
-
-      let updatedAnswers;
-      if (isReanswering) {
-        updatedAnswers = [
-          ...state.userAnswers.slice(0, state.currentQuestionIndex),
-          answer,
-        ];
-      } else {
-        updatedAnswers = [...state.userAnswers, answer];
-      }
+      const { answer, isLastQuestion } = action.payload;
 
       return {
         ...state,
-        userAnswers: updatedAnswers,
+        userAnswers: [...state.userAnswers, answer],
         currentQuestionIndex: isLastQuestion
           ? state.currentQuestionIndex
           : state.currentQuestionIndex + 1,

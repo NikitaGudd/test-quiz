@@ -20,20 +20,13 @@ export const useQuizNavigation = (state, dispatch, questions) => {
         state.currentQuestionIndex,
         questions.length
       );
-      const isReanswering =
-        state.currentQuestionIndex < state.userAnswers.length;
 
       dispatch({
         type: QUIZ_ACTIONS.ANSWER_QUESTION,
-        payload: { answer, isLastQuestion: lastQuestion, isReanswering },
+        payload: { answer, isLastQuestion: lastQuestion },
       });
     },
-    [
-      state.currentQuestionIndex,
-      state.userAnswers.length,
-      questions.length,
-      dispatch,
-    ]
+    [state.currentQuestionIndex, questions.length, dispatch]
   );
 
   const handleBackFromQuestion = useCallback(() => {
